@@ -150,7 +150,7 @@ function initPreloader() {
   if (!pre) return;
 
   /* تأخیر مصنوعی از ۲۴۰۰ به ۴۰۰ میلی‌ثانیه کاهش یافت */
-  const minDelay = prefersReducedMotion ? 100 : 4000;
+  const minDelay = prefersReducedMotion ? 100 : 3000;
 
   let hidden = false;
   const hide = () => {
@@ -173,7 +173,7 @@ function initPreloader() {
   }
 
   /* شبکه‌ی اطمینان: حداکثر بعد از ۳ ثانیه، پری‌لودر برداشته می‌شود */
-  setTimeout(hide, 5000);
+  setTimeout(hide, 4000);
 }
 
 /* ============================================================
