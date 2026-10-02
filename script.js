@@ -1,6 +1,6 @@
 /* ============================================================
    هگمتانه — Hegmataneh
-   script.js — بازنویسی کامل
+   script.js — نسخه بهینه‌شده
    ============================================================ */
 
 'use strict';
@@ -11,23 +11,22 @@
 const CONFIG = {
   tracks: [
     { id: 1,  title: 'خواب سنگ‌ها',     artist: 'هگمتانه', src: 'audio/track-01.mp3', tags: ['featured', 'new'] },
-    { id: 2,  title: 'باد در ستون‌ها',  artist: 'هگمتانه', src: 'audio/track-02.mp3', tags: ['featured']       },
-    { id: 3,  title: 'کتیبه‌ی گمشده',   artist: 'هگمتانه', src: 'audio/track-03.mp3', tags: ['new']            },
-    { id: 4,  title: 'شب هگمتانه',       artist: 'هگمتانه', src: 'audio/track-04.mp3', tags: ['featured']       },
-    { id: 5,  title: 'آواز شیر سنگی',    artist: 'هگمتانه', src: 'audio/track-05.mp3', tags: []                 },
-    { id: 6,  title: 'راه ابریشم',       artist: 'هگمتانه', src: 'audio/track-06.mp3', tags: ['new']            },
-    { id: 7,  title: 'نغمه‌ی ماد',        artist: 'هگمتانه', src: 'audio/track-07.mp3', tags: []                 },
-    { id: 8,  title: 'خاکستر و طلا',     artist: 'هگمتانه', src: 'audio/track-08.mp3', tags: ['featured']       },
-    { id: 9,  title: 'کوچه‌های همدان',   artist: 'هگمتانه', src: 'audio/track-09.mp3', tags: []                 },
-    { id: 10, title: 'سایه‌ی ارگ',        artist: 'هگمتانه', src: 'audio/track-10.mp3', tags: ['new']            },
-    { id: 11, title: 'وداع',             artist: 'هگمتانه', src: 'audio/track-11.mp3', tags: []                 },
-    { id: 12, title: 'بازگشت',           artist: 'هگمتانه', src: 'audio/track-12.mp3', tags: ['featured']       },
-    { id: 12, title: 'بازگشت',           artist: 'هگمتانه', src: 'audio/track-12.mp3', tags: ['featured']       },
-    { id: 13, title: 'Mermaid Waltz',     artist: 'Oscar Pascasio', src: 'audio/track-13.mp3', tags: []                 },
-    { id: 14, title: 'Mermaid Waltz',     artist: 'Oscar Pascasio', src: 'audio/track-14.mp3', tags: []                 },
-    { id: 15, title: ' Written On The Sky',     artist: 'Max Richter', src: 'audio/track-15.mp3', tags: ['new']            },
-    { id: 16, title: 'Watermark',     artist: 'Enya', src: 'audio/track-16.mp3', tags: ['featured']       },
-    { id: 17, title: 'romantic',     artist: 'Alex-Productions', src: 'audio/track-17.mp3', tags: []                 },
+    { id: 2,  title: 'باد در ستون‌ها',  artist: 'هگمتانه', src: 'audio/track-02.mp3', tags: ['featured'] },
+    { id: 3,  title: 'کتیبه‌ی گمشده',   artist: 'هگمتانه', src: 'audio/track-03.mp3', tags: ['new'] },
+    { id: 4,  title: 'شب هگمتانه',       artist: 'هگمتانه', src: 'audio/track-04.mp3', tags: ['featured'] },
+    { id: 5,  title: 'آواز شیر سنگی',    artist: 'هگمتانه', src: 'audio/track-05.mp3', tags: [] },
+    { id: 6,  title: 'راه ابریشم',       artist: 'هگمتانه', src: 'audio/track-06.mp3', tags: ['new'] },
+    { id: 7,  title: 'نغمه‌ی ماد',        artist: 'هگمتانه', src: 'audio/track-07.mp3', tags: [] },
+    { id: 8,  title: 'خاکستر و طلا',     artist: 'هگمتانه', src: 'audio/track-08.mp3', tags: ['featured'] },
+    { id: 9,  title: 'کوچه‌های همدان',   artist: 'هگمتانه', src: 'audio/track-09.mp3', tags: [] },
+    { id: 10, title: 'سایه‌ی ارگ',        artist: 'هگمتانه', src: 'audio/track-10.mp3', tags: ['new'] },
+    { id: 11, title: 'وداع',             artist: 'هگمتانه', src: 'audio/track-11.mp3', tags: [] },
+    { id: 12, title: 'بازگشت',           artist: 'هگمتانه', src: 'audio/track-12.mp3', tags: ['featured'] },
+    { id: 13, title: 'Mermaid Waltz',     artist: 'Oscar Pascasio', src: 'audio/track-13.mp3', tags: [] },
+    { id: 14, title: 'Mermaid Waltz',     artist: 'Oscar Pascasio', src: 'audio/track-14.mp3', tags: [] },
+    { id: 15, title: 'Written On The Sky', artist: 'Max Richter', src: 'audio/track-15.mp3', tags: ['new'] },
+    { id: 16, title: 'Watermark',         artist: 'Enya', src: 'audio/track-16.mp3', tags: ['featured'] },
+    { id: 17, title: 'Romantic',          artist: 'Alex-Productions', src: 'audio/track-17.mp3', tags: [] },
   ],
 
   email:    'abolfazlengineer9@gmail.com',
@@ -144,15 +143,19 @@ const Toasts = {
 };
 
 /* ============================================================
-   ۰۵ · PRELOADER
+   ۰۵ · PRELOADER  ← بهینه‌سازی: سرعت بارگذاری
    ============================================================ */
 function initPreloader() {
   const pre = $('#preloader');
   if (!pre) return;
 
-  const minDelay = prefersReducedMotion ? 100 : 500;
+  /* تأخیر مصنوعی از ۲۴۰۰ به ۴۰۰ میلی‌ثانیه کاهش یافت */
+  const minDelay = prefersReducedMotion ? 100 : 400;
 
+  let hidden = false;
   const hide = () => {
+    if (hidden) return;
+    hidden = true;
     setTimeout(() => {
       pre.classList.add('is-done');
       document.body.classList.remove('no-scroll');
@@ -162,8 +165,15 @@ function initPreloader() {
 
   document.body.classList.add('no-scroll');
 
-  if (document.readyState === 'complete') hide();
-  else window.addEventListener('load', hide, { once: true });
+  /* دیگر منتظر window.load نمی‌مانیم — منتظر DOMContentLoaded می‌مانیم */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hide, { once: true });
+  } else {
+    hide();
+  }
+
+  /* شبکه‌ی اطمینان: حداکثر بعد از ۳ ثانیه، پری‌لودر برداشته می‌شود */
+  setTimeout(hide, 3000);
 }
 
 /* ============================================================
@@ -190,7 +200,7 @@ const Theme = {
 };
 
 /* ============================================================
-   ۰۷ · CUSTOM CURSOR
+   ۰۷ · CURSOR
    ============================================================ */
 function initCursor() {
   if (isTouchDevice || prefersReducedMotion) return;
@@ -284,10 +294,10 @@ function initDrawer() {
     burger.setAttribute('aria-expanded', 'true');
     drawer.setAttribute('aria-hidden', 'false');
   };
-    const close = () => {
+
+  const close = () => {
     document.body.classList.remove('drawer-open', 'no-scroll');
     burger.setAttribute('aria-expanded', 'false');
-    /* اگر فوکوس داخل دراور است، اول از آن خارج شو تا هشدار aria-hidden ندهد */
     if (drawer.contains(document.activeElement)) {
       document.activeElement.blur();
     }
@@ -339,7 +349,7 @@ function initParticles() {
     canvas.width  = W * dpr;
     canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = Math.min(Math.round((W * H) / 22000), 90);
+    const count = Math.min(Math.round((W * H) / 24000), 70);
     particles = Array.from({ length: count }, spawn);
   };
 
@@ -455,7 +465,7 @@ const Favorites = {
 };
 
 /* ============================================================
-   ۱۵ · PLAYER  (بازنویسی‌شده و مطمئن)
+   ۱۵ · PLAYER
    ============================================================ */
 const Player = {
   audio: null,
@@ -811,7 +821,8 @@ function updatePlayerMeta(track) {
     }
   }
   document.title = `${track.title} · هگمتانه`;
-    const dl = $('#playerDownload');
+
+  const dl = $('#playerDownload');
   if (dl && track.src) {
     dl.href = track.src;
     dl.setAttribute('download', `${track.title}.mp3`);
@@ -866,7 +877,7 @@ function syncPlayUI() {
 }
 
 /* ============================================================
-   ۱۷ · VISUALIZER (مصنوعی، همیشه کار می‌کند)
+   ۱۷ · VISUALIZER
    ============================================================ */
 let visualizerRAF = null;
 let vizPhase = 0;
@@ -934,7 +945,8 @@ function renderTracks() {
             <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>
           </svg>
         </button>
-                <a class="track__download" href="${escapeHTML(t.src)}" download="${escapeHTML(t.title)}.mp3" aria-label="دانلود آهنگ" title="دانلود">
+
+        <a class="track__download" href="${escapeHTML(t.src)}" download="${escapeHTML(t.title)}.mp3" aria-label="دانلود آهنگ" title="دانلود">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
             <path d="M7 10l5 5 5-5"/>
@@ -1009,13 +1021,11 @@ function bindTrackEvents() {
   $$('.track').forEach(card => {
     card.addEventListener('click', e => {
       if (e.target.closest('[data-like]')) return;
+      if (e.target.closest('.track__download')) return;
       const id = parseInt(card.dataset.id, 10);
       const idx = State.tracks.findIndex(t => t.id === id);
       if (idx >= 0) Player.load(idx, true);
     });
-      $$('.track__download').forEach(btn => {
-    btn.addEventListener('click', e => e.stopPropagation());
-  });
 
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -1049,6 +1059,10 @@ function bindTrackEvents() {
       if (liked) Toasts.show('به محبوب‌ها اضافه شد.', 'success', 2200);
       if (State.filter === 'favorites') renderTracks();
     });
+  });
+
+  $$('.track__download').forEach(btn => {
+    btn.addEventListener('click', e => e.stopPropagation());
   });
 }
 
@@ -1375,8 +1389,17 @@ function initRipple() {
     setTimeout(() => ripple.remove(), 700);
   });
 }
+
+(function () {
+  if (document.getElementById('ripple-kf')) return;
+  const s = document.createElement('style');
+  s.id = 'ripple-kf';
+  s.textContent = '@keyframes rippleGrow{to{transform:scale(1);opacity:0}}';
+  document.head.appendChild(s);
+})();
+
 /* ============================================================
-   ۲۶ · CLICK PARTICLES
+   ۲۵ · CLICK PARTICLES
    ============================================================ */
 function initClickParticles() {
   if (prefersReducedMotion) return;
@@ -1385,7 +1408,6 @@ function initClickParticles() {
   const COUNT  = 10;
 
   document.addEventListener('click', e => {
-    /* روی فرم‌ها افکت نزن تا مزاحم فوکوس نشود */
     if (e.target.closest('input, textarea, select')) return;
 
     const x = e.clientX;
@@ -1423,21 +1445,12 @@ function initClickParticles() {
   }, { passive: true });
 }
 
-
-/* inject keyframes */
-(function () {
-  if (document.getElementById('ripple-kf')) return;
-  const s = document.createElement('style');
-  s.id = 'ripple-kf';
-  s.textContent = '@keyframes rippleGrow{to{transform:scale(1);opacity:0}}';
-  document.head.appendChild(s);
-})();
-
 /* ============================================================
-   ۲۵ · PRELOAD DURATIONS
+   ۲۶ · PRELOAD DURATIONS  ← بهینه‌سازی: فقط ۳ آهنگ اول
    ============================================================ */
 function preloadDurations() {
-  State.tracks.forEach((track, i) => {
+  /* فقط ۳ آهنگ اول از قبل خوانده می‌شوند تا سرور خفه نشود */
+  State.tracks.slice(0, 3).forEach((track, i) => {
     if (!track.src) return;
     const a = document.createElement('audio');
     a.preload = 'metadata';
@@ -1458,7 +1471,7 @@ function preloadDurations() {
 }
 
 /* ============================================================
-   ۲۶ · BOOT
+   ۲۷ · BOOT
    ============================================================ */
 function boot() {
   initPreloader();
