@@ -150,7 +150,7 @@ function initPreloader() {
   const pre = $('#preloader');
   if (!pre) return;
 
-  const minDelay = prefersReducedMotion ? 200 : 2400;
+  const minDelay = prefersReducedMotion ? 100 : 500;
 
   const hide = () => {
     setTimeout(() => {
