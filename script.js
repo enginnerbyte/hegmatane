@@ -150,7 +150,7 @@ function initPreloader() {
   if (!pre) return;
 
   /* تأخیر مصنوعی از ۲۴۰۰ به ۴۰۰ میلی‌ثانیه کاهش یافت */
-  const minDelay = prefersReducedMotion ? 100 : 2700;
+  const minDelay = prefersReducedMotion ? 100 : 4000;
 
   let hidden = false;
   const hide = () => {
